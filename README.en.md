@@ -56,39 +56,47 @@ See git history for line-by-line diffs.
 
 ## Install
 
-Install instructions per platform:
+### 🌟 Easiest: let your AI install it
 
-- [**Claude Code**](platforms/claude-code.md)
-- [**Codex CLI**](platforms/codex.md)
-- [**Gemini CLI**](platforms/gemini.md)
-- [**GitHub Copilot CLI**](platforms/copilot.md)
-- [**opencode**](platforms/opencode.md)
-- [**Cursor / other AI assistants**](platforms/generic.md)
+Pick the URL for **your platform** and paste it into your AI:
 
-### Quick install for Claude Code
+| Platform | Tell your AI: "Please install superpowers-lite. Follow:" |
+|---|---|
+| Claude Code | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/claude-code.md` |
+| opencode | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.md` |
+| Codex CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.md` |
+| Gemini CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.md` |
+| Cursor / Windsurf / Cline | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md` |
 
-The default install is the **Chinese** version. Add `--lang en` for English:
+Each URL contains platform-specific instructions. The AI will download the
+skills and install them to the correct global directory (`~/.claude/skills/`,
+`~/.config/opencode/skills/`, etc.) and report where they ended up.
+
+Full overview: [INSTALL.md](INSTALL.md).
+
+### Gemini CLI native one-liner
+
+If you're on Gemini CLI:
+
+```bash
+gemini extensions install https://github.com/MySwallow/superpowers-lite
+```
+
+### Claude Code manual script (alternative)
 
 ```bash
 git clone https://github.com/MySwallow/superpowers-lite.git
 cd superpowers-lite
-./scripts/install-claude-code.sh --lang en
+./scripts/install-claude-code.sh              # Chinese (default)
+./scripts/install-claude-code.sh --lang en    # English
 ```
 
 This copies the 7 skills into `~/.claude/skills/` (user scope).
 
-### Platform support matrix
+### Other platforms
 
-| Platform | Status | Skill loader |
-|---|---|---|
-| Claude Code | ✅ Tested | `Skill` tool, `~/.claude/skills/` |
-| Codex CLI | 🔬 Compatible | See `references/codex-tools.md` |
-| Gemini CLI | 🔬 Compatible | `activate_skill` |
-| GitHub Copilot CLI | 🔬 Compatible | `skill` tool |
-| opencode | 🔬 Compatible | Auto-loads `AGENTS.md`, tool names mirror Claude Code |
-| Cursor / Windsurf / Cline | 📄 Read as markdown | Manual reference in rules |
-
-"🔬 Compatible" means the skill content is platform-neutral and tool mappings exist in `skills/using-superpowers/references/`, but not extensively tested on those platforms. Issues and PRs welcome.
+See the "Manual fallback" section in [INSTALL.md](INSTALL.md), or let the AI
+install for you using the first option above.
 
 ---
 

@@ -56,37 +56,44 @@
 
 ## 安装
 
-各平台安装说明：
+### 🌟 最简单：让你的 AI 自己装
 
-- [**Claude Code**](platforms/claude-code.md)
-- [**Codex CLI**](platforms/codex.md)
-- [**Gemini CLI**](platforms/gemini.md)
-- [**GitHub Copilot CLI**](platforms/copilot.md)
-- [**opencode**](platforms/opencode.md)
-- [**Cursor / 其他 AI 助手**](platforms/generic.md)
+挑你当前平台对应的 URL，把它粘到 AI 终端里：
 
-### Claude Code 一行安装
+| 平台 | 跟 AI 说："帮我安装 superpowers-lite，按这个链接操作：" |
+|---|---|
+| Claude Code | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/claude-code.md` |
+| opencode | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.md` |
+| Codex CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.md` |
+| Gemini CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.md` |
+| Cursor / Windsurf / Cline | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md` |
+
+每个 URL 对应一份针对该平台的指令，AI 读完会下载 skill 并装到对应的全局目录（`~/.claude/skills/`、`~/.config/opencode/skills/` 等）。
+
+完整说明见 [INSTALL.md](INSTALL.md)。
+
+### Gemini CLI 原生一行装
+
+如果你用 Gemini CLI，可以直接用扩展机制：
+
+```bash
+gemini extensions install https://github.com/MySwallow/superpowers-lite
+```
+
+### Claude Code 手动脚本（备选）
 
 ```bash
 git clone https://github.com/MySwallow/superpowers-lite.git
 cd superpowers-lite
-./scripts/install-claude-code.sh
+./scripts/install-claude-code.sh           # 中文（默认）
+./scripts/install-claude-code.sh --lang en # 英文
 ```
 
 会把 7 个 skill 复制到 `~/.claude/skills/`（user scope）。
 
-### 平台支持矩阵
+### 其他平台
 
-| 平台 | 状态 | Skill 加载方式 |
-|---|---|---|
-| Claude Code | ✅ 已测试 | `Skill` 工具，`~/.claude/skills/` |
-| Codex CLI | 🔬 兼容 | 参考 `references/codex-tools.md` |
-| Gemini CLI | 🔬 兼容 | `activate_skill` |
-| GitHub Copilot CLI | 🔬 兼容 | `skill` 工具 |
-| opencode | 🔬 兼容 | `AGENTS.md` 自动加载，工具名与 Claude Code 同源 |
-| Cursor / Windsurf / Cline | 📄 当 markdown 读 | 在 rules 里手动引用 |
-
-"🔬 兼容" 表示 skill 内容平台中立、`skills/using-superpowers/references/` 里有工具名映射，但未在那些平台做过充分测试。欢迎提 Issue / PR。
+参见 [INSTALL.md](INSTALL.md) 的"Manual fallback"段落，或让 AI 按上面第一种方式自动安装。
 
 ---
 

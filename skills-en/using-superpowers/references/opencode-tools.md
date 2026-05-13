@@ -27,7 +27,7 @@ opencode automatically loads one of these files at session start (in priority or
 3. `CLAUDE.md` in the project root (Claude Code compatibility fallback)
 4. `~/.claude/CLAUDE.md` (global fallback)
 
-The simplest integration is to add a pointer to the skills directory in your global `AGENTS.md` — see `platforms/opencode.md`.
+The simplest integration is to let an AI assistant follow `INSTALL.md` at the repo root, or manually use `templates/AGENTS.md` to add a reference.
 
 ## Permission model
 

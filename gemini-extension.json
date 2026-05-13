@@ -1,0 +1,6 @@
+{
+  "name": "superpowers-lite",
+  "description": "Streamlined coding-methodology skills: brainstorming, planning, debugging, parallel agents. A lite fork of obra/superpowers.",
+  "version": "0.1.0",
+  "contextFileName": "GEMINI.md"
+}
