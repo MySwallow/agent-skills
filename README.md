@@ -62,6 +62,7 @@
 - [**Codex CLI**](platforms/codex.md)
 - [**Gemini CLI**](platforms/gemini.md)
 - [**GitHub Copilot CLI**](platforms/copilot.md)
+- [**opencode**](platforms/opencode.md)
 - [**Cursor / 其他 AI 助手**](platforms/generic.md)
 
 ### Claude Code 一行安装
@@ -82,6 +83,7 @@ cd superpowers-lite
 | Codex CLI | 🔬 兼容 | 参考 `references/codex-tools.md` |
 | Gemini CLI | 🔬 兼容 | `activate_skill` |
 | GitHub Copilot CLI | 🔬 兼容 | `skill` 工具 |
+| opencode | 🔬 兼容 | `AGENTS.md` 自动加载，工具名与 Claude Code 同源 |
 | Cursor / Windsurf / Cline | 📄 当 markdown 读 | 在 rules 里手动引用 |
 
 "🔬 兼容" 表示 skill 内容平台中立、`skills/using-superpowers/references/` 里有工具名映射，但未在那些平台做过充分测试。欢迎提 Issue / PR。

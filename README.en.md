@@ -62,6 +62,7 @@ Install instructions per platform:
 - [**Codex CLI**](platforms/codex.md)
 - [**Gemini CLI**](platforms/gemini.md)
 - [**GitHub Copilot CLI**](platforms/copilot.md)
+- [**opencode**](platforms/opencode.md)
 - [**Cursor / other AI assistants**](platforms/generic.md)
 
 ### Quick install for Claude Code
@@ -84,6 +85,7 @@ This copies the 7 skills into `~/.claude/skills/` (user scope).
 | Codex CLI | 🔬 Compatible | See `references/codex-tools.md` |
 | Gemini CLI | 🔬 Compatible | `activate_skill` |
 | GitHub Copilot CLI | 🔬 Compatible | `skill` tool |
+| opencode | 🔬 Compatible | Auto-loads `AGENTS.md`, tool names mirror Claude Code |
 | Cursor / Windsurf / Cline | 📄 Read as markdown | Manual reference in rules |
 
 "🔬 Compatible" means the skill content is platform-neutral and tool mappings exist in `skills/using-superpowers/references/`, but not extensively tested on those platforms. Issues and PRs welcome.
