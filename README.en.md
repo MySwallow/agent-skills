@@ -46,9 +46,11 @@ We also modified the remaining 7 skills to:
 
 - Remove all `superpowers:` namespace references (skills are now neutral)
 - Replace "REQUIRED SUB-SKILL" hard dependencies with softer "Related skills" notes
-- Change `subagent-driven-development`'s implementer to **stage** changes instead of commit
+- `writing-plans`: default task template is "implement → static checks → stage for review"; the TDD template is preserved as an optional appendix, used only when the task explicitly requires it; removed the default `git commit` step from the template
+- `subagent-driven-development`: implementer only stages (no commit); the flowchart node, example output, and `implementer-prompt.md` are now all aligned ("implements, stages for review, self-reviews" instead of "implements, tests, commits"); writing tests happens only when the task explicitly requires it
+- `systematic-debugging`: default bug-fix flow is "establish reliable reproduction → fix → verify (project's static checks)"; automated tests are written only when the task requires them
 - Change `executing-plans`'s Step 3 to run static checks + report, instead of auto-finishing
-- Streamline `using-superpowers` (kept DOT flow graph, condensed Red Flags from 12 to 7)
+- Streamline `using-superpowers` (kept DOT flow graph, condensed Red Flags from 12 to 7); removed the obsolete worktree-detection section from `codex-tools.md`
 
 See git history for line-by-line diffs.
 

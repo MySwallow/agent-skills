@@ -46,9 +46,11 @@
 
 - 移除所有 `superpowers:` 命名空间引用（skill 现在是中性的）
 - 把 "REQUIRED SUB-SKILL" 硬依赖改为温和的 "Related skills"
-- `subagent-driven-development` 的 implementer 改为 **stage** 而非 commit
+- `writing-plans`：默认任务模板改为"实现 → 静态检查 → stage 待审"；TDD 模板保留为可选附录，仅当任务明确要求时启用；删除模板里的默认 `git commit` 步骤
+- `subagent-driven-development`：implementer 只 stage 不 commit；流程图节点、示例输出、`implementer-prompt.md` 全部对齐（"实现、stage 待评审、自审"，而非"实现、测试、提交"）；写测试改为任务明确要求时才执行
+- `systematic-debugging`：修 bug 默认改为"建立可靠复现 → 修 → 验证（项目静态检查）"；自动化测试仅在任务要求时才写
 - `executing-plans` 的 Step 3 改为静态检查+报告，不自动结束
-- 精简 `using-superpowers`（保留 DOT 流程图，Red Flags 从 12 条精简到 7 条）
+- 精简 `using-superpowers`（保留 DOT 流程图，Red Flags 从 12 条精简到 7 条）；`codex-tools.md` 删除已失效的 worktree 探测段落
 
 具体改动可看 git 历史。
 
