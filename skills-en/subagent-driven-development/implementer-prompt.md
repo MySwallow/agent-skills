@@ -30,8 +30,8 @@ Task tool (general-purpose):
 
     Once you're clear on requirements:
     1. Implement exactly what the task specifies
-    2. Write tests (following TDD if task says to)
-    3. Verify implementation works
+    2. **Only if the task explicitly requires tests** (TDD or test coverage), write them; otherwise skip this step
+    3. Verify the implementation: run the project's existing static checks (type-check / lint / build). Run tests only if they exist or the task added them.
     4. Stage your changes (`git add`) — **do NOT commit**; the user reviews and commits themselves
     5. Self-review (see below)
     6. Report back
@@ -90,10 +90,10 @@ Task tool (general-purpose):
     - Did I only build what was requested?
     - Did I follow existing patterns in the codebase?
 
-    **Testing:**
-    - Do tests actually verify behavior (not just mock behavior)?
-    - Did I follow TDD if required?
-    - Are tests comprehensive?
+    **Verification:**
+    - Do the project's static checks pass with no new errors?
+    - If the task required tests: do they actually verify behavior (not just mocks), and are they comprehensive?
+    - If the task did NOT require tests: did I avoid adding unsolicited test files?
 
     If you find issues during self-review, fix them now before reporting.
 
@@ -102,7 +102,7 @@ Task tool (general-purpose):
     When done, report:
     - **Status:** DONE | DONE_WITH_CONCERNS | BLOCKED | NEEDS_CONTEXT
     - What you implemented (or what you attempted, if blocked)
-    - What you tested and test results
+    - What you verified (static checks output; test results if any)
     - Files changed
     - Self-review findings (if any)
     - Any issues or concerns

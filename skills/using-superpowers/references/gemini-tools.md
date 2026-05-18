@@ -24,10 +24,10 @@ Gemini CLI 通过 `@` 语法原生支持子代理。使用内置的 `@generalist
 
 | Skill 指令 | Gemini CLI 等价物 |
 |-------------------|----------------------|
-| `Task tool (superpowers:implementer)` | `@generalist` 加上填好的 `implementer-prompt.md` 模板 |
-| `Task tool (superpowers:spec-reviewer)` | `@generalist` 加上填好的 `spec-reviewer-prompt.md` 模板 |
-| `Task tool (superpowers:code-reviewer)` | `@code-reviewer`（捆绑的代理）或 `@generalist` 加上填好的评审 prompt |
-| `Task tool (superpowers:code-quality-reviewer)` | `@generalist` 加上填好的 `code-quality-reviewer-prompt.md` 模板 |
+| 调度 implementer 子代理 | `@generalist` 加上填好的 `implementer-prompt.md` 模板 |
+| 调度 spec-reviewer 子代理 | `@generalist` 加上填好的 `spec-reviewer-prompt.md` 模板 |
+| 调度 code-reviewer 子代理 | `@code-reviewer`（捆绑的代理）或 `@generalist` 加上填好的评审 prompt |
+| 调度 code-quality-reviewer 子代理 | `@generalist` 加上填好的 `code-quality-reviewer-prompt.md` 模板 |
 | `Task tool (general-purpose)` 加内联 prompt | `@generalist` 加上你的内联 prompt |
 
 ### Prompt 填充

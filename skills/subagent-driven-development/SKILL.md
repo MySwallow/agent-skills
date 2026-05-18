@@ -50,7 +50,7 @@ digraph process {
         "调度 implementer 子代理 (./implementer-prompt.md)" [shape=box];
         "Implementer 子代理有问题？" [shape=diamond];
         "回答问题、提供上下文" [shape=box];
-        "Implementer 子代理实现、测试、提交、自审" [shape=box];
+        "Implementer 子代理实现、stage 待评审、自审" [shape=box];
         "调度 spec 审阅者子代理 (./spec-reviewer-prompt.md)" [shape=box];
         "Spec 审阅者子代理确认代码与 spec 一致？" [shape=diamond];
         "Implementer 子代理修复 spec 缺口" [shape=box];
@@ -69,8 +69,8 @@ digraph process {
     "调度 implementer 子代理 (./implementer-prompt.md)" -> "Implementer 子代理有问题？";
     "Implementer 子代理有问题？" -> "回答问题、提供上下文" [label="是"];
     "回答问题、提供上下文" -> "调度 implementer 子代理 (./implementer-prompt.md)";
-    "Implementer 子代理有问题？" -> "Implementer 子代理实现、测试、提交、自审" [label="否"];
-    "Implementer 子代理实现、测试、提交、自审" -> "调度 spec 审阅者子代理 (./spec-reviewer-prompt.md)";
+    "Implementer 子代理有问题？" -> "Implementer 子代理实现、stage 待评审、自审" [label="否"];
+    "Implementer 子代理实现、stage 待评审、自审" -> "调度 spec 审阅者子代理 (./spec-reviewer-prompt.md)";
     "调度 spec 审阅者子代理 (./spec-reviewer-prompt.md)" -> "Spec 审阅者子代理确认代码与 spec 一致？";
     "Spec 审阅者子代理确认代码与 spec 一致？" -> "Implementer 子代理修复 spec 缺口" [label="否"];
     "Implementer 子代理修复 spec 缺口" -> "调度 spec 审阅者子代理 (./spec-reviewer-prompt.md)" [label="复审"];
@@ -146,7 +146,7 @@ Implementer: "开始前——hook 应该装在用户级还是系统级？"
 Implementer: "明白。现在开始实现……"
 [稍后] Implementer:
   - 实现了 install-hook 命令
-  - 加了测试，5/5 通过
+  - 静态检查通过（shellcheck / 项目 lint）
   - 自审：发现漏了 --force 标志，已加上
   - 已暂存待评审（未提交）
 
@@ -154,7 +154,7 @@ Implementer: "明白。现在开始实现……"
 Spec reviewer: ✅ Spec 合规——所有需求满足，没多余的
 
 [用暂存 diff 调度代码质量审阅者]
-Code reviewer: 优点：测试覆盖好、整洁。问题：无。Approved。
+Code reviewer: 优点：结构清晰、错误处理到位。问题：无。Approved。
 
 [标记 Task 1 完成]
 
@@ -166,7 +166,7 @@ Task 2: 恢复模式
 Implementer: [无问题，开始]
 Implementer:
   - 加了 verify/repair 模式
-  - 8/8 测试通过
+  - 静态检查通过；本任务明确要求测试覆盖，加了 8 条单元测试，全部通过
   - 自审：都没问题
   - 已暂存待评审（未提交）
 

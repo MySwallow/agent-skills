@@ -50,7 +50,7 @@ digraph process {
         "Dispatch implementer subagent (./implementer-prompt.md)" [shape=box];
         "Implementer subagent asks questions?" [shape=diamond];
         "Answer questions, provide context" [shape=box];
-        "Implementer subagent implements, tests, commits, self-reviews" [shape=box];
+        "Implementer subagent implements, stages for review, self-reviews" [shape=box];
         "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [shape=box];
         "Spec reviewer subagent confirms code matches spec?" [shape=diamond];
         "Implementer subagent fixes spec gaps" [shape=box];
@@ -69,8 +69,8 @@ digraph process {
     "Dispatch implementer subagent (./implementer-prompt.md)" -> "Implementer subagent asks questions?";
     "Implementer subagent asks questions?" -> "Answer questions, provide context" [label="yes"];
     "Answer questions, provide context" -> "Dispatch implementer subagent (./implementer-prompt.md)";
-    "Implementer subagent asks questions?" -> "Implementer subagent implements, tests, commits, self-reviews" [label="no"];
-    "Implementer subagent implements, tests, commits, self-reviews" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)";
+    "Implementer subagent asks questions?" -> "Implementer subagent implements, stages for review, self-reviews" [label="no"];
+    "Implementer subagent implements, stages for review, self-reviews" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)";
     "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" -> "Spec reviewer subagent confirms code matches spec?";
     "Spec reviewer subagent confirms code matches spec?" -> "Implementer subagent fixes spec gaps" [label="no"];
     "Implementer subagent fixes spec gaps" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [label="re-review"];
@@ -146,7 +146,7 @@ You: "User level (~/.config/superpowers/hooks/)"
 Implementer: "Got it. Implementing now..."
 [Later] Implementer:
   - Implemented install-hook command
-  - Added tests, 5/5 passing
+  - Static checks pass (shellcheck / project lint)
   - Self-review: Found I missed --force flag, added it
   - Staged for review (not committed)
 
@@ -154,7 +154,7 @@ Implementer: "Got it. Implementing now..."
 Spec reviewer: ✅ Spec compliant - all requirements met, nothing extra
 
 [Dispatch code quality reviewer with the staged diff]
-Code reviewer: Strengths: Good test coverage, clean. Issues: None. Approved.
+Code reviewer: Strengths: Clean structure, solid error handling. Issues: None. Approved.
 
 [Mark Task 1 complete]
 
@@ -166,7 +166,7 @@ Task 2: Recovery modes
 Implementer: [No questions, proceeds]
 Implementer:
   - Added verify/repair modes
-  - 8/8 tests passing
+  - Static checks pass; this task explicitly required test coverage, added 8 unit tests, all passing
   - Self-review: All good
   - Staged for review (not committed)
 

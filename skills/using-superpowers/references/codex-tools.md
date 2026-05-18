@@ -26,30 +26,8 @@ multi_agent = true
 
 历史注：`rust-v0.115.0` 之前的 Codex 构建将"等待已派生代理"暴露为 `wait`。当前的 Codex 使用 `wait_agent` 等待已派生代理。`wait` 这个名字现在归属 code-mode 的 `exec/wait`——按 `cell_id` 恢复一个已 yield 的 exec cell；它不是已派生代理的结果工具。
 
-## 环境检测
+## 工作目录与分支
 
-创建 worktree 或收尾分支的 skill 应该在继续之前
-用只读 git 命令检测自己所处的环境：
+superpowers-lite 不依赖 git worktree——所有 skill 直接在当前分支工作。implementer 只 `git add` 暂存变更，**不自动 commit / push / 开 PR**，由用户审阅后自行处理。
 
-```bash
-GIT_DIR=$(cd "$(git rev-parse --git-dir)" 2>/dev/null && pwd -P)
-GIT_COMMON=$(cd "$(git rev-parse --git-common-dir)" 2>/dev/null && pwd -P)
-BRANCH=$(git branch --show-current)
-```
-
-- `GIT_DIR != GIT_COMMON` → 已经在一个 linked worktree 里（跳过创建）
-- `BRANCH` 为空 → detached HEAD（无法从沙箱中分支/推送/开 PR）
-
-参见 `using-git-worktrees` 步骤 0 和 `finishing-a-development-branch`
-步骤 1，了解每个 skill 如何使用这些信号。
-
-## Codex App 收尾
-
-当沙箱阻止分支/推送操作（外部管理的 worktree 中的 detached HEAD）时，
-代理会提交所有工作，并告知用户使用 App 的原生控件：
-
-- **"Create branch"** — 命名分支，然后通过 App UI 提交/推送/开 PR
-- **"Hand off to local"** — 将工作交接到用户的本地 checkout
-
-代理仍可运行测试、暂存文件，并输出建议的分支名、提交消息和
-PR 描述供用户复制。
+如果你在 Codex 沙箱里发现 git 写操作（branch / push / PR）受限，也不需要绕开——把变更暂存好，告诉用户在自己本机操作即可。

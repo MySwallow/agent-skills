@@ -29,31 +29,8 @@ waiting as `wait`. Current Codex uses `wait_agent` for spawned agents. The
 `wait` name now belongs to code-mode `exec/wait`, which resumes a yielded exec
 cell by `cell_id`; it is not the spawned-agent result tool.
 
-## Environment Detection
+## Working Directory and Branches
 
-Skills that create worktrees or finish branches should detect their
-environment with read-only git commands before proceeding:
+superpowers-lite does NOT rely on git worktrees — all skills work directly on the current branch. The implementer only `git add`s changes; it does **not** auto-commit / push / open PRs. The user reviews and handles those themselves.
 
-```bash
-GIT_DIR=$(cd "$(git rev-parse --git-dir)" 2>/dev/null && pwd -P)
-GIT_COMMON=$(cd "$(git rev-parse --git-common-dir)" 2>/dev/null && pwd -P)
-BRANCH=$(git branch --show-current)
-```
-
-- `GIT_DIR != GIT_COMMON` → already in a linked worktree (skip creation)
-- `BRANCH` empty → detached HEAD (cannot branch/push/PR from sandbox)
-
-See `using-git-worktrees` Step 0 and `finishing-a-development-branch`
-Step 1 for how each skill uses these signals.
-
-## Codex App Finishing
-
-When the sandbox blocks branch/push operations (detached HEAD in an
-externally managed worktree), the agent commits all work and informs
-the user to use the App's native controls:
-
-- **"Create branch"** — names the branch, then commit/push/PR via App UI
-- **"Hand off to local"** — transfers work to the user's local checkout
-
-The agent can still run tests, stage files, and output suggested branch
-names, commit messages, and PR descriptions for the user to copy.
+If you find that git write operations (branch / push / PR) are restricted inside the Codex sandbox, you don't need to work around it — just stage the changes and tell the user to perform those steps on their own machine.

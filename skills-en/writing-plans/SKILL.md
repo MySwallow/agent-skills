@@ -7,9 +7,11 @@ description: Use when you have a spec or requirements for a multi-step task, bef
 
 ## Overview
 
-Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
+Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, relevant code and docs to check, how to verify. Give them the whole plan as bite-sized tasks. DRY. YAGNI.
 
-Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
+Assume they are a skilled developer, but know almost nothing about our toolset or problem domain.
+
+**TDD and unit tests are NOT default.** Add tests only when the user or task explicitly asks for them; default verification is the project's existing static checks (type-check / lint / build). **Never auto-commit** — after a task is implemented, only stage (`git add`); the user reviews and commits.
 
 **Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
 
@@ -33,12 +35,17 @@ This structure informs the task decomposition. Each task should produce self-con
 
 ## Bite-Sized Task Granularity
 
-**Each step is one action (2-5 minutes):**
+**Each step is one action (2-5 minutes). Default form:**
+- "Implement `<specific function/component>`" - step
+- "Run the project's static checks (type-check / lint / build)" - step
+- "Stage the change (`git add`) for user review" - step
+
+**Only if** the task explicitly requires TDD or test coverage, use the red-green form:
 - "Write the failing test" - step
 - "Run it to make sure it fails" - step
 - "Implement the minimal code to make the test pass" - step
 - "Run the tests and make sure they pass" - step
-- "Commit" - step
+- "Stage the change for user review" - step
 
 ## Plan Document Header
 
@@ -58,7 +65,39 @@ This structure informs the task decomposition. Each task should produce self-con
 ---
 ```
 
-## Task Structure
+## Task Structure (default template)
+
+````markdown
+### Task N: [Component Name]
+
+**Files:**
+- Create: `exact/path/to/file.py`
+- Modify: `exact/path/to/existing.py:123-145`
+
+- [ ] **Step 1: Implement**
+
+```python
+def function(input):
+    return expected
+```
+
+- [ ] **Step 2: Run project's static checks**
+
+Run: `<actual project command, e.g. mypy / tsc --noEmit / cargo check / pnpm build>`
+Expected: pass with no new errors
+
+- [ ] **Step 3: Stage changes for user review**
+
+```bash
+git add path/to/file.py
+```
+
+**Do NOT commit** — the user reviews and commits.
+````
+
+## Task Structure (optional: TDD template)
+
+**Only when the task explicitly requires TDD or unit tests** use this alternative template:
 
 ````markdown
 ### Task N: [Component Name]
@@ -93,12 +132,13 @@ def function(input):
 Run: `pytest tests/path/test.py::test_name -v`
 Expected: PASS
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 5: Stage changes for user review**
 
 ```bash
 git add tests/path/test.py src/path/file.py
-git commit -m "feat: add specific feature"
 ```
+
+**Do NOT commit** — the user reviews and commits.
 ````
 
 ## No Placeholders
@@ -115,7 +155,9 @@ Every step must contain the actual content an engineer needs. These are **plan f
 - Exact file paths always
 - Complete code in every step — if a step changes code, show the code
 - Exact commands with expected output
-- DRY, YAGNI, TDD, frequent commits
+- DRY, YAGNI
+- Default: stage for user review, **never** auto-commit
+- Default: no unit tests; use the TDD template above **only** when the task explicitly requires it
 
 ## Self-Review
 
